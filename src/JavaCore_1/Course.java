@@ -43,7 +43,4 @@ public class Course {
         else result += "Препятствие не преодолел  "+ '\n';
     }
 
-
-}
-
-
+    }

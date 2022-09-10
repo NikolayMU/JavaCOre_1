@@ -1,6 +1,7 @@
 package JavaCore_1;
 
 public class Team {
+
     public static void main(String[] args) {
         Person[] person = new Person[4];
         person[0] = new Person("JAKE", 355);
