@@ -1,10 +1,6 @@
 package JavaCore_2;
 
 public class Main {
-
-        /*
-        группа самописных исключений
-         */
         static class MyArraySizeException extends Exception {
             public MyArraySizeException(){
                 super("Ошибка размера массива");
@@ -16,11 +12,7 @@ public class Main {
             }
         }
 
-        /*
-        методы из задания
-         */
         public static void checkArraySize(String[][] array) throws MyArraySizeException {
-            // проверка размерности массива
             boolean result = false;
             if (array.length!=4) {
                 result = true;
@@ -34,18 +26,19 @@ public class Main {
                 throw new MyArraySizeException();
             }
         }
-
-        public static void arraySumm(String[][] array) throws MyArrayDataException {
-            // сумма элементов массива
+// ссумирование чисел в массиве
+        public static void arraySum(String[][] array) throws MyArrayDataException {
             int res = 0;
             Integer value;
             for (int i=0; i<4; i++){
                 for (int j=0; j<4; j++){
                     try {
-                        value = Integer.parseInt(array[i][j]);
+                        value = Integer.valueOf(array[i][j]);
+                        /* Use parseInt(String) to convert a string to a int primitive, or use valueOf(String) to
+                        convert a string to an Integer object*/
                     }
                     catch (Exception e) {
-                        System.out.println("Неконвертируемое значение - "+"\""+array[i][j]+"\" в ячейке : "+i+" "+j);
+                        System.out.println("Преобразование не удается выполнить - "+"\""+array[i][j]+"\" в ячейке : "+i+" "+j);
                         throw new MyArrayDataException(i,j);
                     }
                     res+=value;
@@ -54,44 +47,40 @@ public class Main {
             System.out.println("Сумма элементов массива = "+res);
         }
 
-        /*
-        точка входа
-         */
+    // exception "ошибка размера"
         public static void main(String[] args) {
-            String[][] good_array = {{"1","2","3","4"},{"5","6","7","8"},{"9","10","11","12"},{"13","14","15","16"}};
-            String[][] good_array1 = {{"1","s","3","4"},{"5","6","7","8"},{"9","10","11","12"},{"13","14","15","16"}};
-            String[][] bad_array = {{"1","2","3","4"},{"5","6","7","8"},{"9","10","11","12"},{"13","14","15","16","17"}};
-            // исключение «ошибка размера» на правильном массиве
+            String[][] rightArray = {{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
+            String[][] bestArray = {{"1","Hello world","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4"}};
+            String[][] badArray = {{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4"},{"1","2","3","4","5"}};
             try {
-                checkArraySize(good_array);
+                checkArraySize(rightArray);
             }
             catch (MyArraySizeException e) {
                 System.out.println(e);
             }
-            // исключение «ошибка размера» на неправильном массиве
+            // массив с ошибкой длины
             try {
-                checkArraySize(bad_array);
+                checkArraySize(badArray);
             }
             catch (MyArraySizeException e) {
                 System.out.println(e);
-                // clipboard : Main$MyArraySizeException: Ошибка размера массива
+
             }
-            // подсчет суммы дял правильного массива
+
             try {
-                arraySumm(good_array);
+                arraySum(rightArray);
             }
             catch (MyArrayDataException e) {
                 System.out.println(e);
-                // clipboard : Сумма элементов массива = 136
+
             }
             // подсчет суммы для неправильного массива
             try {
-                arraySumm(good_array1);
+                arraySum(bestArray);
             }
             catch (MyArrayDataException e) {
                 System.out.println(e);
-                // clipboard : Неконвертируемое значение - "s" в ячейке : 0 1
-                //             Main$MyArrayDataException: Ошибка данных в ячейке 0 1
+                // В массиве bestArray не удасться преобразовать часть массива содержащую - "Hello World" в ячейке : 0 1
             }
 
         }
