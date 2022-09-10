@@ -80,7 +80,7 @@ public class Main {
             }
             catch (MyArrayDataException e) {
                 System.out.println(e);
-                // В массиве bestArray не удасться преобразовать часть массива содержащую - "Hello World" в ячейке : 0 1
+                // В массиве bestArray не удастся преобразовать часть массива содержащую "Hello World" в ячейке : 0 1
             }
 
         }
