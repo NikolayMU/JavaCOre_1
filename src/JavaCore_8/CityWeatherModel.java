@@ -1,11 +1,11 @@
-package JavaCore_7;
+package JavaCore_8;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.Map;
 
-public class City {
+public class CityWeatherModel {
     @JsonProperty("LocalObservationDateTime")
     private Date date;
     @JsonProperty("WeatherText")
@@ -41,14 +41,4 @@ public class City {
     public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
-
-    @Override
-    public String toString() {
-        return "City{" +
-                "date=" + date +
-                ", weatherText='" + weatherText + '\'' +
-                ", temperature=" + temperature +
-                '}';
-    }
 }
-

@@ -1,21 +1,28 @@
-package JavaCore_7;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package JavaCore_8;
 
 import java.util.Date;
-import java.util.Map;
 
-public class City {
-    @JsonProperty("LocalObservationDateTime")
+public class WeatherInfoDTO {
+    private Integer key;
+    private String name;
     private Date date;
-    @JsonProperty("WeatherText")
     private String weatherText;
     private Double temperature;
 
-    @JsonProperty("Temperature")
-    public void setFromComplexTemperature(Map<String, Object> complexTemperature) {
-        Map<String, Object> metric = (Map<String, Object>) complexTemperature.get("Metric");
-        temperature = (Double) metric.get("Value");
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
+        this.key = key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDate() {
@@ -44,11 +51,12 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "date=" + date +
+        return "WeatherInfoDTO{" +
+                "key=" + key +
+                ", name='" + name + '\'' +
+                ", date=" + date +
                 ", weatherText='" + weatherText + '\'' +
                 ", temperature=" + temperature +
                 '}';
     }
 }
-

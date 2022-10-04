@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="okio-2.6.0">
+  <library name="okhttp-4.8.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/okio-2.6.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/okhttp-4.8.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

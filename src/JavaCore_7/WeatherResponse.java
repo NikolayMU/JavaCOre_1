@@ -1,72 +1,50 @@
 package JavaCore_7;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import okhttp3.*;
+
+import java.io.IOException;
 import java.util.List;
 
 public class WeatherResponse {
-    String cod;
-    Integer message;
-    Integer cnt;
-    List<SituateWeather> list;
-    City city;
+    public static final String API_KEY_PARAM = "apikey";
+    public static final String API_KEY = "L8jY9hzHqmGxBxDAAgmEUYztLuVwkgG5";
+    public static final String CURRENT_TOWN_KEY = "295212";
+    public static final String WEATHER_URL = "https://dataservice.accuweather.com/currentconditions/v1/" + CURRENT_TOWN_KEY;
 
-    // конструкторы и геттеры
-    public WeatherResponse() {
-    }
+    public static void main(String[] args) throws IOException {
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(WEATHER_URL).newBuilder();
+        urlBuilder.addQueryParameter(API_KEY_PARAM, API_KEY);
 
-    public String getCod() {
-        return cod;
-    }
+        HttpUrl httpUrl = urlBuilder.build();
 
-    public void setCod(String cod) {
-        this.cod = cod;
-    }
+        Request.Builder requestBuilder = new Request.Builder();
 
-    public Integer getMessage() {
-        return message;
-    }
+        Request request = requestBuilder
+                .get()
+                .url(httpUrl)
+                .build();
 
-    public void setMessage(Integer message) {
-        this.message = message;
-    }
+        OkHttpClient client = new OkHttpClient();
 
-    public Integer getCnt() {
-        return cnt;
-    }
+        Call call = client.newCall(request);
 
-    public void setCnt(Integer cnt) {
-        this.cnt = cnt;
-    }
+        Response response = call.execute();
 
-    public List<SituateWeather> getList() {
-        return list;
-    }
+        String responseBody = response.body().string();
 
-    public void setList(List<SituateWeather> list) {
-        this.list = list;
-    }
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-    public City getCity() {
-        return city;
-    }
+        List<City> cities = objectMapper.readValue(responseBody, new TypeReference<List<City>>() {
+        });
 
-    public void setCity(City city) {
-        this.city = city;
-    }
+        City city = cities.get(0);
 
-    public boolean isEmpty(){
-        if (this.city==null||this.list==null){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // преобразование в строку
-    @Override
-    public String toString() {
-        if (isEmpty()) return "";
-        String result = "Ответ сервера погоды:\n" +
-                "\tМесто: " + city + ".\n\tПрогноз погоды на 5 дней (детализация 3 часа):\n"+ list;
-        return result.replace("[","").replace("]","");
+        System.out.println(city);
     }
 }
+
+
