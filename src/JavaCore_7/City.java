@@ -1,54 +1,84 @@
 package JavaCore_7;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class City{             // текущий город
+    Integer id;
+    String name;
+    Coord coord;
+    String country;
+    Integer population;
+    Integer timezone;
+    Long sunrise;
+    Long sunset;
 
-import java.util.Date;
-import java.util.Map;
-
-public class City {
-    @JsonProperty("LocalObservationDateTime")
-    private Date date;
-    @JsonProperty("WeatherText")
-    private String weatherText;
-    private Double temperature;
-
-    @JsonProperty("Temperature")
-    public void setFromComplexTemperature(Map<String, Object> complexTemperature) {
-        Map<String, Object> metric = (Map<String, Object>) complexTemperature.get("Metric");
-        temperature = (Double) metric.get("Value");
+    public City() {
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getWeatherText() {
-        return weatherText;
+    public String getName() {
+        return name;
     }
 
-    public void setWeatherText(String weatherText) {
-        this.weatherText = weatherText;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getTemperature() {
-        return temperature;
+    public Coord getCoord() {
+        return coord;
     }
 
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
+    public void setCoord(Coord coord) {
+        this.coord = coord;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Integer getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(Integer population) {
+        this.population = population;
+    }
+
+    public Integer getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(Integer timezone) {
+        this.timezone = timezone;
+    }
+
+    public Long getSunrise() {
+        return sunrise;
+    }
+
+    public void setSunrise(Long sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public Long getSunset() {
+        return sunset;
+    }
+
+    public void setSunset(Long sunset) {
+        this.sunset = sunset;
     }
 
     @Override
     public String toString() {
-        return "City{" +
-                "date=" + date +
-                ", weatherText='" + weatherText + '\'' +
-                ", temperature=" + temperature +
-                '}';
+        return "город " + name + "(" + country+")";
     }
 }
-
