@@ -85,4 +85,7 @@ public class WeatherController {
             return new WeatherResponse();
         }
     }
+
+    public static void printCityHistory(String city) {
+    }
 }

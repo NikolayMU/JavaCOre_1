@@ -1,70 +1,88 @@
 package JavaCore_8;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+public class Main{             // характеристики погоды
+    Double temp;
+    Double feels_like;
+    Double temp_min;
+    Double temp_max;
+    Integer pressure;
+    Integer sea_level;
+    Integer grnd_level;
+    Integer humidity;
+    Double temp_kf;
 
-public class Main {
-    private static final WeatherClient WEATHER_CLIENT = new WeatherClient();
-    private static final WeatherInfoRepository WEATHER_INFO_REPOSITORY = new WeatherInfoRepository();
-
-
-    public static void main(String[] args) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            while (true) {
-                System.out.println("Choose what you want:");
-                System.out.println("1. Fetch weather info");
-                System.out.println("2. Get weather info");
-
-                String command = reader.readLine();
-                if ("exit".equalsIgnoreCase(command)) {
-                    System.exit(0);
-                } else {
-                    if ("1".equalsIgnoreCase(command)) {
-                        fetchFlow(reader);
-                    } else if ("2".equalsIgnoreCase(command)) {
-                        getFlow(reader);
-                    } else {
-                        System.out.println("Wrong menu choosing '" + command + "' try again");
-                    }
-                }
-            }
-        }
+    public Main() {
     }
 
-    private static void fetchFlow(BufferedReader reader) throws IOException {
-        System.out.println("Write city key location for fetch weather info");
-        int cityKey = getCityKey(reader);
-        WeatherInfoDTO weatherInfoDTO = WEATHER_CLIENT.getCity(cityKey);
-        WEATHER_INFO_REPOSITORY.updateWeatherInfo(weatherInfoDTO);
+    public Double getTemp() {
+        return temp;
     }
 
-    private static void getFlow(BufferedReader reader) throws IOException {
-        System.out.println("Write city key location for getting weather info from bd");
-        int cityKey = getCityKey(reader);
-        WeatherInfoDTO weatherInfoDTO = WEATHER_INFO_REPOSITORY.getWeatherInfo(cityKey);
-        if (weatherInfoDTO == null) {
-            System.out.println("Weather info by city key '" + cityKey + "' not found");
-        } else {
-            System.out.println("Weather info by city key: " + weatherInfoDTO);
-        }
+    public void setTemp(Double temp) {
+        this.temp = temp;
     }
 
-    private static int getCityKey(BufferedReader reader) throws IOException {
-        int cityKey;
-        while (true) {
-            String command = reader.readLine();
-            if ("exit".equalsIgnoreCase(command)) {
-                System.exit(0);
-            } else {
-                try {
-                    cityKey = Integer.parseInt(command);
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid city location key '" + command + "' try again");
-                }
-            }
-        }
-        return cityKey;
+    public Double getFeels_like() {
+        return feels_like;
+    }
+
+    public void setFeels_like(Double feels_like) {
+        this.feels_like = feels_like;
+    }
+
+    public Integer getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(Integer pressure) {
+        this.pressure = pressure;
+    }
+
+    public Integer getSea_level() {
+        return sea_level;
+    }
+
+    public void setSea_level(Integer sea_level) {
+        this.sea_level = sea_level;
+    }
+
+    public Integer getGrnd_level() {
+        return grnd_level;
+    }
+
+    public void setGrnd_level(Integer grnd_level) {
+        this.grnd_level = grnd_level;
+    }
+
+    public Integer getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(Integer humidity) {
+        this.humidity = humidity;
+    }
+
+    public Double getTemp_kf() {
+        return temp_kf;
+    }
+
+    public void setTemp_kf(Double temp_kf) {
+        this.temp_kf = temp_kf;
+    }
+
+    public Double getTemp_min() {
+        return temp_min;
+    }
+
+    public void setTemp_min(Double temp_min) {
+        this.temp_min = temp_min;
+    }
+
+    public Double getTemp_max() {
+        return temp_max;
+    }
+
+    public void setTemp_max(Double temp_max) {
+        this.temp_max = temp_max;
     }
 }
